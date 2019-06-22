@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './index.css';
 import {Row, Col, Button, Container, Form, FormLabel, FormControl, FormGroup } from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {getRoutes} from '../../ducks/route';
@@ -17,6 +17,7 @@ class App extends React.Component {
       selectedStop: '',
       stopNumber: ''
     }
+    this.handleStopChange = this.handleStopChange.bind(this);
   }
   
   componentDidMount() {
@@ -37,19 +38,19 @@ class App extends React.Component {
       return {selectedDirection: selectedDirection}
    });
     this.props._getStops('STOPS',`${this.state.selectedRoute['Route']}/${selectedDirection['Value']}`);
-  }
+  };
 
-  handleStopChange = (e) => {
-    const selectedStop = this.props.stops.find(eachStop =>  eachStop.Text === e.target.value)
+  async handleStopChange(e) {
+    const selectedStop = this.props.stopsStation.find(eachStop =>  eachStop.Text == e.target.value);
     this.setState(function(){
       return {selectedStop: selectedStop}
-   });
-    this.props._getTimePointDeparture('BASEURL',`${this.state.selectedRoute['Route']}/${this.state.selectedDirection['Value']}/${selectedStop['Value']}`);
-    this.props.history.push('/departure');
+    });
+     await this.props._getTimePointDeparture('BASEURL',`${this.state.selectedRoute['Route']}/${this.state.selectedDirection['Value']}/${selectedStop['Value']}`);
+     this.props.history.push('/departure');
   }
 
   render(){
-  const { routes, direction, stops } = this.props;
+  const { routes, direction, stopsStation } = this.props;
   const {selectedRoute, selectedDirection, selectedStop, stopNumber} = this.state;
   return (
     <div >
@@ -92,7 +93,7 @@ class App extends React.Component {
                 <br />
                   <FormLabel>Select Stops/Station </FormLabel>
                   <FormControl as="select" value={selectedStop['Text']} onChange={this.handleStopChange}>
-                    {stops.map(eachStop => {
+                    {stopsStation.map(eachStop => {
                       return <option key={eachStop.Value} > {eachStop.Text} </option>
                     })}
                   </FormControl>
@@ -111,10 +112,16 @@ class App extends React.Component {
 
 export default connect(state => {
   const {routes, direction, stops} = state;
-    return {
+  
+  const stopsStation = stops.map(eachstops => ({
+    ...eachstops,
+    Text: eachstops.Text.replace(/\s{1,}/g, ' '),
+  }));
+
+  return {
     routes,
     direction,
-    stops
+    stopsStation
     };
   },
   dispatch => ({_getRoutes: resourceType => dispatch(getRoutes(resourceType)),
