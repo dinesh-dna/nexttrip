@@ -41,7 +41,7 @@ class App extends React.Component {
   };
 
   async handleStopChange(e) {
-    const selectedStop = this.props.stopsStation.find(eachStop =>  eachStop.Text == e.target.value);
+    const selectedStop = this.props.stopsStationList.find(eachStop => eachStop.Text == e.target.value);
     this.setState(function(){
       return {selectedStop: selectedStop}
     });
@@ -50,7 +50,7 @@ class App extends React.Component {
   }
 
   render(){
-  const { routes, direction, stopsStation } = this.props;
+  const { routes, direction, stopsStationList } = this.props;
   const {selectedRoute, selectedDirection, selectedStop, stopNumber} = this.state;
   return (
     <div >
@@ -93,7 +93,7 @@ class App extends React.Component {
                 <br />
                   <FormLabel>Select Stops/Station </FormLabel>
                   <FormControl as="select" value={selectedStop['Text']} onChange={this.handleStopChange}>
-                    {stopsStation.map(eachStop => {
+                    {stopsStationList.map(eachStop => {
                       return <option key={eachStop.Value} > {eachStop.Text} </option>
                     })}
                   </FormControl>
@@ -118,10 +118,15 @@ export default connect(state => {
     Text: eachstops.Text.replace(/\s{1,}/g, ' '),
   }));
 
+  const stopsStationList = stopsStation.map(eachstops => ({
+    ...eachstops,
+    Text: eachstops.Text.trimRight()
+  }))
+
   return {
     routes,
     direction,
-    stopsStation
+    stopsStationList
     };
   },
   dispatch => ({_getRoutes: resourceType => dispatch(getRoutes(resourceType)),
