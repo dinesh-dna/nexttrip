@@ -41,7 +41,7 @@ class App extends React.Component {
   };
 
   async handleStopChange(e) {
-    const selectedStop = this.props.stopsStationList.find(eachStop => eachStop.Text == e.target.value);
+    const selectedStop = this.props.stopsStationList.find(eachStop => eachStop.Text === e.target.value);
     this.setState(function(){
       return {selectedStop: selectedStop}
     });
