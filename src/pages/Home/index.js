@@ -7,6 +7,7 @@ import {getDirection} from '../../ducks/direction';
 import {getStops} from '../../ducks/stops';
 import {getTimePointDeparture} from '../../ducks/timePointDeparture';
 import icon from '../../mob_logo.png';
+import Dropdown from '../../components/Dropdowns';
 class App extends React.Component {
   
   constructor(props){
@@ -24,7 +25,8 @@ class App extends React.Component {
     this.props._getRoutes('ROUTES');
   }
 
-  handleChange = (e) => {
+  handleRouteChange = (e) => {
+    console.log('e', e);
     const selectedRoute = this.props.routes.find(eachRoute =>  eachRoute.Description === e.target.value)
     this.setState(function(){
       return {selectedRoute: selectedRoute}
@@ -72,31 +74,35 @@ class App extends React.Component {
         <Form>
           <FormGroup>
               <FormLabel>Select Route </FormLabel>
-              <FormControl as="select" value={selectedRoute['Description']} onChange={this.handleChange}>
-                {routes.map(eachRoute => {
-                  return <option key={eachRoute.Route} > {eachRoute.Description} </option>
-                })}
-              </FormControl>
+              <Dropdown 
+                list={routes} 
+                selectedItem={selectedRoute} 
+                handleChange={this.handleRouteChange} 
+                displayText='Description' 
+                keyValue='Route' />
+
               {selectedRoute !== '' ? (
                 <>
                 <br />
                   <FormLabel>Select Direction </FormLabel>
-                  <FormControl as="select" value={selectedDirection['Text']} onChange={this.handleDirectionChange}>
-                    {direction.map(eachDirection => {
-                      return <option key={eachDirection.Value} > {eachDirection.Text} </option>
-                    })}
-                  </FormControl>
+                  <Dropdown 
+                    list={direction} 
+                    selectedItem={selectedDirection} 
+                    handleChange={this.handleDirectionChange} 
+                    displayText='Text' 
+                    keyValue='Value' />
                 </>
               ) : null }
               {selectedDirection !== '' ? (
                 <>
                 <br />
                   <FormLabel>Select Stops/Station </FormLabel>
-                  <FormControl as="select" value={selectedStop['Text']} onChange={this.handleStopChange}>
-                    {stopsStationList.map(eachStop => {
-                      return <option key={eachStop.Value} > {eachStop.Text} </option>
-                    })}
-                  </FormControl>
+                  <Dropdown 
+                    list={stopsStationList} 
+                    selectedItem={selectedStop} 
+                    handleChange={this.handleStopChange} 
+                    displayText='Text' 
+                    keyValue='Value'/>
                 </>
               ) : null }
           </FormGroup>
@@ -104,7 +110,7 @@ class App extends React.Component {
           <input type="text" value={stopNumber} onChange={e => this.setState(e.target.value) }/>
           <Button onClick={this.handleStopEntry} >STOP NUMBER</Button>
         </Form>
-      ) : <div> Loading Bus Routes ...... </div>}
+      ) : <div> Loading Bus Routes .... </div>}
     </div>
   );
   }
