@@ -26,9 +26,7 @@ export default function reducer(state = initialState, action) {
 
     switch(type) {
         case REQUEST_SUCCEEDED:
-            if(requestType === GET_DEPARTURE) {
-                return  response ? response.data : state;
-            }
+            return state;
         // eslint-disable-next-line no-fallthrough
         case REQUEST_FAILED:
             return state;

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import NextTripHomePage from './pages/Home';
 import DepartureSchedules from './pages/DepartureSchedules';
@@ -8,7 +9,6 @@ import {BrowserRouter, Route} from 'react-router-dom'
 import {Provider} from 'react-redux';
 import store from '../src/store';
 import {App, Content, Container} from '../src/utils/styles';
-import 'bootstrap/dist/css/bootstrap.css';
 import {Header} from '../src/components/Header';
 ReactDOM.render(
     <Provider store={store}>

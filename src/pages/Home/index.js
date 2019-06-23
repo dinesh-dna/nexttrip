@@ -3,10 +3,9 @@ import './index.css';
 import {Col, Button, Form, FormGroup } from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {getDirection} from '../../ducks/direction';
-import {getDepartureList} from '../../ducks/departure';
 import {getRoutes} from '../../ducks/route';
 import {getStops} from '../../ducks/stops';
-import {getTimePointDeparture} from '../../ducks/timePointDeparture';
+import {getTimePointDeparture, getDepartureList} from '../../ducks/timePointDeparture';
 import Dropdown from '../../components/Dropdowns';
 import styled from 'styled-components';
 
