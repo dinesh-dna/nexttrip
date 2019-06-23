@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormLabel, FormControl } from 'react-bootstrap';
+import { FormControl, Row, Col } from 'react-bootstrap';
 
 class Dropdowns extends React.Component {
 
@@ -8,17 +8,24 @@ class Dropdowns extends React.Component {
     }
 
     render() {
-        const { list, selectedItem, displayText, keyValue } = this.props;
+        const { list, selectedItem, displayText, keyValue, label } = this.props;
         return (
-                <div>
-                    <FormControl as="select" value={selectedItem[`${displayText}`]} onChange={this.handleChange}> 
-                        {list.map((eachItem) => {
-                            return <option key={eachItem[keyValue]} > {eachItem[displayText]} </option>
-                        })}
-                    </FormControl>
-                </div>
+                <Row style={{margin: '10px', textAlign: 'center'}}>
+                    <Col sm={{span:2, offset: 2}}>
+                        {/* <FormLabel>{label}</FormLabel> */}
+                    </Col>
+                    <Col sm={4}>
+                        <FormControl as="select" value={selectedItem[`${displayText}`]} onChange={this.handleChange}> 
+                            <option>{label}</option>
+
+                            {list.map((eachItem) => {
+                                return <option key={eachItem[keyValue]} > {eachItem[displayText]} </option>
+                            })}
+                        </FormControl>
+                    </Col>
+                </Row>
         )
     }
 }
 
-export default Dropdowns
+export default Dropdowns;

@@ -4,12 +4,12 @@ import {getWorkerSaga} from './sagas';
 import {REQUEST_SUCCEEDED, REQUEST_FAILED} from './requests';
 
 export const initialState = [];
-export const GET_ROUTES = 'route/getRoutes';
-export const sagas = [routeWatcherSaga];
+export const GET_DEPARTURE = 'departure/getDepartureList';
+export const sagas = [departureWatcherSaga];
 
-export function getRoutes(resourceType, id, query, details) { 
+export function getDepartureList(resourceType, id, query, details) { 
     return {
-        type: GET_ROUTES,
+        type: GET_DEPARTURE,
         resourceType: upperCase(resourceType),
         id,
         query : 'format=json',
@@ -17,8 +17,8 @@ export function getRoutes(resourceType, id, query, details) {
       };
 }
 
-export function* routeWatcherSaga() {
-    yield takeLatest(GET_ROUTES, getWorkerSaga);
+export function* departureWatcherSaga() {
+    yield takeLatest(GET_DEPARTURE, getWorkerSaga);
   }
   
 export default function reducer(state = initialState, action) { 
@@ -26,10 +26,9 @@ export default function reducer(state = initialState, action) {
 
     switch(type) {
         case REQUEST_SUCCEEDED:
-            if(requestType === GET_ROUTES) {
+            if(requestType === GET_DEPARTURE) {
                 return  response ? response.data : state;
             }
-            
         // eslint-disable-next-line no-fallthrough
         case REQUEST_FAILED:
             return state;

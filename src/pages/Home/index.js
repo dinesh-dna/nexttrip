@@ -1,13 +1,19 @@
 import React from 'react';
 import './index.css';
-import {Row, Col, Button, Container, Form, FormLabel, FormControl, FormGroup } from 'react-bootstrap';
+import {Col, Button, Form, FormGroup } from 'react-bootstrap';
 import {connect} from 'react-redux';
-import {getRoutes} from '../../ducks/route';
 import {getDirection} from '../../ducks/direction';
+import {getDepartureList} from '../../ducks/departure';
+import {getRoutes} from '../../ducks/route';
 import {getStops} from '../../ducks/stops';
 import {getTimePointDeparture} from '../../ducks/timePointDeparture';
-import icon from '../../mob_logo.png';
 import Dropdown from '../../components/Dropdowns';
+import styled from 'styled-components';
+
+const StyledButton = styled(Button)`
+  margin: 50px;
+  height: 30px;
+`;
 class App extends React.Component {
   
   constructor(props){
@@ -26,7 +32,6 @@ class App extends React.Component {
   }
 
   handleRouteChange = (e) => {
-    console.log('e', e);
     const selectedRoute = this.props.routes.find(eachRoute =>  eachRoute.Description === e.target.value)
     this.setState(function(){
       return {selectedRoute: selectedRoute}
@@ -47,68 +52,76 @@ class App extends React.Component {
     this.setState(function(){
       return {selectedStop: selectedStop}
     });
-     await this.props._getTimePointDeparture('BASEURL',`${this.state.selectedRoute['Route']}/${this.state.selectedDirection['Value']}/${selectedStop['Value']}`);
-     this.props.history.push('/departure');
-  }
+     await this.props._getTimePointDeparture('NEXTTRIP_BASEURL',`${this.state.selectedRoute['Route']}/${this.state.selectedDirection['Value']}/${selectedStop['Value']}`);
+     this.props.history.push('/nextTrip');
+  };
+
+  async handleStopEntry() {
+    if(this.state.stopNumber){
+      await this.props._getDepartureList('NEXTTRIP_BASEURL', this.state.stopNumber); 
+      this.props.history.push('/nextTrip');
+    }
+    else{
+      alert('Enter Stop number and Click a Button');
+    }
+  };
 
   render(){
   const { routes, direction, stopsStationList } = this.props;
   const {selectedRoute, selectedDirection, selectedStop, stopNumber} = this.state;
   return (
     <div >
-      <Container>
-          <img src={icon} alt="Metro Transit" />
-          {/* <div className='d-flex flex-row'>
-            <div style={{width: '20%',height: '20% ', backgroundColor: 'red'}}>
-              </div>
-              <div style={{width: '20%', backgroundColor: 'red'}}>
-              </div>
-            
-          </div> */}
-          <Row>
-            <Col md={8} style={{height: '15px', backgroundColor: 'yellow'}} />
-            <Col md={4} style={{height: '15px',backgroundColor: 'red'}} />
-          </Row>
-      </Container>
       {routes.length > 0 ? (
-        <Form>
-          <FormGroup>
-              <FormLabel>Select Route </FormLabel>
+        <Form style={{margin: '10%', padding: '20px', backgroundColor: '#F9F5F5'}}>
+          <FormGroup >
               <Dropdown 
                 list={routes} 
                 selectedItem={selectedRoute} 
                 handleChange={this.handleRouteChange} 
                 displayText='Description' 
-                keyValue='Route' />
-
+                keyValue='Route'
+                label='Select Route' />
               {selectedRoute !== '' ? (
                 <>
                 <br />
-                  <FormLabel>Select Direction </FormLabel>
                   <Dropdown 
                     list={direction} 
                     selectedItem={selectedDirection} 
                     handleChange={this.handleDirectionChange} 
                     displayText='Text' 
-                    keyValue='Value' />
+                    keyValue='Value'
+                    label='Select Direction' />
                 </>
               ) : null }
               {selectedDirection !== '' ? (
                 <>
                 <br />
-                  <FormLabel>Select Stops/Station </FormLabel>
                   <Dropdown 
                     list={stopsStationList} 
                     selectedItem={selectedStop} 
                     handleChange={this.handleStopChange} 
                     displayText='Text' 
-                    keyValue='Value'/>
+                    keyValue='Value'
+                    label='Select Stops/Station'/>
                 </>
               ) : null }
           </FormGroup>
-          <hr />
-          <input type="text" value={stopNumber} onChange={e => this.setState(e.target.value) }/>
-          <Button onClick={this.handleStopEntry} >STOP NUMBER</Button>
+          <Col sm={{offset:4,span:4}}>
+            <input type="number"
+              value={stopNumber} 
+              onKeyPress={event => {
+                if (event.key === "Enter") {
+                  this.handleStopEntry();
+                }
+              }}
+              onChange={e => this.setState({stopNumber: e.target.value})}/>
+            <StyledButton 
+              onClick={this.handleStopEntry} 
+              size="sm" 
+              disabled={!stopNumber} >
+                STOP NUMBER
+            </StyledButton>
+          </Col>
         </Form>
       ) : <div> Loading Bus Routes .... </div>}
     </div>
@@ -137,6 +150,7 @@ export default connect(state => {
   },
   dispatch => ({_getRoutes: resourceType => dispatch(getRoutes(resourceType)),
     _getDirection: (resourceType,id) => dispatch(getDirection(resourceType,id)),
+    _getDepartureList: (resourceType, id) => dispatch(getDepartureList(resourceType, id)),
     _getStops: (resourceType,id) => dispatch(getStops(resourceType,id)),
     _getTimePointDeparture: (resourceType,id) => dispatch(getTimePointDeparture(resourceType,id))
   }))(App);

@@ -22,12 +22,13 @@ export function* routeWatcherSaga() {
   }
 
 export default function reducer(state = initialState, action) { 
-    const {type, requestType,resourceType, response} = action;
+    const {type, requestType, response} = action;
     switch(type) {
         case REQUEST_SUCCEEDED:
             if(requestType === GET_TIMEPOINTDEPARTURE) {
                 return  response ? response.data : state;
             }
+        // eslint-disable-next-line no-fallthrough
         case REQUEST_FAILED:
             return state;
         default:

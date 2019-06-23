@@ -1,19 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './pages/Home';
-import Details from './pages/Detail';
+import NextTripHomePage from './pages/Home';
+import DepartureSchedules from './pages/DepartureSchedules';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter, Route} from 'react-router-dom'
 import {Provider} from 'react-redux';
 import store from '../src/store';
-
+import {App, Content, Container} from '../src/utils/styles';
+import 'bootstrap/dist/css/bootstrap.css';
+import {Header} from '../src/components/Header';
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
-            <Route exact path='/' component={App} />
-            <Route path='/departure' component={Details} />
-        </BrowserRouter>
+        <App>
+            <Container>
+                <BrowserRouter>
+                    <Header />
+                    <Route exact path='/' component={NextTripHomePage} />
+                    <Route path='/nextTrip' component={DepartureSchedules} />
+                </BrowserRouter>
+            </Container>
+        </App>
     </Provider>
 , document.getElementById('root'));
 

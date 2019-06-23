@@ -1,7 +1,7 @@
 import { takeLatest } from 'redux-saga/effects';
 import upperCase from 'upper-case';
 import {getWorkerSaga} from './sagas';
-import {REQUEST_SUCCEEDED, REQUEST_FAILED} from './requests';
+import {REQUEST_SUCCEEDED} from './requests';
 
 export const initialState = [];
 export const GET_STOPS = 'stops/getStops';
@@ -28,6 +28,7 @@ export default function reducer(state = initialState, action) {
             if(requestType === GET_STOPS) {
                 return  response ? response.data : state;
             }
+        // eslint-disable-next-line no-fallthrough
         default:
             return state;
     }

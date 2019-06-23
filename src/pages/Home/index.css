@@ -69,3 +69,10 @@
   display: flex;
   height: '20%';
 } */
+
+.tagLine {
+  height: '22px';
+  border-radius: '9px';
+  margin-top: '3px';
+  background-color: '#EBCA23';
+}
