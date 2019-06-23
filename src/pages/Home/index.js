@@ -12,7 +12,7 @@ import styled from 'styled-components';
 const StyledButton = styled(Button)`
   margin: 50px;
   height: 30px;
-`;
+  `;
 class App extends React.Component {
   
   constructor(props){
@@ -61,7 +61,7 @@ class App extends React.Component {
       this.props.history.push('/nextTrip');
     }
     else{
-      alert('Enter Stop number and Click a Button');
+      alert('Please enter Stop number');
     }
   };
 
@@ -71,7 +71,7 @@ class App extends React.Component {
   return (
     <div >
       {routes.length > 0 ? (
-        <Form style={{margin: '10%', padding: '20px', backgroundColor: '#F9F5F5'}}>
+        <Form style={{margin: '10%', padding: '20px', backgroundColor: '#fff'}}>
           <FormGroup >
               <Dropdown 
                 list={routes} 
@@ -106,7 +106,7 @@ class App extends React.Component {
               ) : null }
           </FormGroup>
           <Col sm={{offset:4,span:4}}>
-            <input type="number"
+            <input type="number" style={{ border: '1px solid #424446'}}
               value={stopNumber} 
               onKeyPress={event => {
                 if (event.key === "Enter") {

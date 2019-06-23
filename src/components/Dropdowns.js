@@ -14,8 +14,8 @@ class Dropdowns extends React.Component {
                     <Col sm={{span:2, offset: 2}}>
                         {/* <FormLabel>{label}</FormLabel> */}
                     </Col>
-                    <Col sm={4}>
-                        <FormControl as="select" value={selectedItem[`${displayText}`]} onChange={this.handleChange}> 
+                    <Col sm={4} >
+                        <FormControl as="select" value={selectedItem[`${displayText}`]} onChange={this.handleChange} style={{ borderRadius: '5px', border: '1px solid #424446'}}> 
                             <option>{label}</option>
 
                             {list.map((eachItem) => {

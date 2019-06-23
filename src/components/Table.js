@@ -25,7 +25,7 @@ class DepartureTable extends React.Component {
                     </thead>
                     <tbody style={{fontSize: '12px', fontWeight: 'bold'}}>
                         {timePointDeparture.map(eachItem => {
-                            return (<tr key={eachItem.index}>
+                            return (<tr key={eachItem.VehicleLatitude}>
                                         <td>{eachItem.Route}</td>
                                         <td>{eachItem.Description}</td>
                                         <td style={eachItem.Actual ? {color: 'black'} :{color: '#ed1b2e'}}>{eachItem.DepartureText}</td>
