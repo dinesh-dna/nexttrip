@@ -15,7 +15,7 @@ class DepartureTable extends React.Component {
         return (
             <Row>
             <Col sm={{offset: 1, span: 10}} style={{marginTop: '40px'}}>
-                <StyledTable striped bordered hover size="sm"> 
+                <StyledTable striped bordered hover size="sm" responsive="sm"> 
                     <thead>
                         <tr>
                             <th>Route</th>
@@ -25,9 +25,11 @@ class DepartureTable extends React.Component {
                     </thead>
                     <tbody style={{fontSize: '12px', fontWeight: 'bold'}}>
                         {timePointDeparture.map(eachItem => {
-                            return (<tr key={eachItem.VehicleLatitude}>
-                                        <td>{eachItem.Route}</td>
-                                        <td>{eachItem.Description}</td>
+                            return (
+                                
+                                    <tr key={eachItem.DepartureText}>
+                                        <td><a href={`https://www.metrotransit.org/route/${eachItem.Route}`}> {`${eachItem.Route}${eachItem.Terminal}`}</a></td>
+                                        <td><a href={`https://www.metrotransit.org/route/${eachItem.Route}`}>{eachItem.Description}</a></td>
                                         <td style={eachItem.Actual ? {color: 'black'} :{color: '#ed1b2e'}}>{eachItem.DepartureText}</td>
                                     </tr>)
                         })}      
