@@ -1,29 +1,29 @@
-import React, {useState} from 'react';
-import moment from 'moment';
+import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components/macro';
 import {Table} from 'react-bootstrap';
 
 const StyledTable = styled(Table)`
-font-family: 'Lato', sans-serif !important;
-font-size: 12px;
+    font-family: 'Lato', sans-serif !important;
+    font-weight: bold;
+    font-size: 12px;
 `;
 class DepartureTable extends React.Component {
 
     render() {
-        const {timePointDeparture} = this.props;
+        const {timePointDeparture, headers} = this.props;
         return (
             <Row>
             <Col sm={{offset: 1, span: 10}} style={{marginTop: '40px'}}>
                 <StyledTable striped bordered hover size="sm" responsive="sm"> 
                     <thead>
                         <tr>
-                            <th>Route</th>
-                            <th>Description</th>
-                            <th>Departs</th>
+                        {headers.map((th,index) => {
+                            return (<th key={index}>{th}</th>)
+                        })}
                         </tr>
                     </thead>
-                    <tbody style={{fontSize: '12px', fontWeight: 'bold'}}>
+                    <tbody>
                         {timePointDeparture.map(eachItem => {
                             return (
                                     <tr key={eachItem.DepartureText}>

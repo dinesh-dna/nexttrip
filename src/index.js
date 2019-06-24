@@ -8,7 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import {BrowserRouter, Route} from 'react-router-dom'
 import {Provider} from 'react-redux';
 import store from '../src/store';
-import {App, Content, Container} from '../src/utils/styles';
+import {App, Container} from '../src/utils/styles';
 import {Header} from '../src/components/Header';
 ReactDOM.render(
     <Provider store={store}>
@@ -16,7 +16,7 @@ ReactDOM.render(
             <Container>
                 <BrowserRouter>
                     <Header />
-                    <Route exact path='/' component={NextTripHomePage} />
+                    <Route exact path='/' component={NextTripHomePage} /> 
                     <Route path='/nextTrip' component={DepartureSchedules} />
                 </BrowserRouter>
             </Container>

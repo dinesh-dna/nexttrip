@@ -1,19 +1,15 @@
 import React from 'react';
 import './index.css';
-import {Col, Button, Form, FormGroup } from 'react-bootstrap';
+import { FormGroup } from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {getDirection} from '../../ducks/direction';
 import {getRoutes} from '../../ducks/route';
 import {getStops} from '../../ducks/stops';
 import {getTimePointDeparture, getDepartureList} from '../../ducks/timePointDeparture';
 import Dropdown from '../../components/Dropdowns';
-import styled from 'styled-components';
+import {StyledForm, StyledLine, StyledButton, StyledInput} from './styles';
 
-const StyledButton = styled(Button)`
-  margin: 50px;
-  height: 30px;
-  `;
-class App extends React.Component {
+export class App extends React.Component {
   
   constructor(props){
     super(props);
@@ -23,7 +19,8 @@ class App extends React.Component {
       selectedStop: '',
       stopNumber: ''
     }
-    this.handleStopChange = this.handleStopChange.bind(this);
+     this.handleStopChange = this.handleStopChange.bind(this);
+     this.handleStopEntry = this.handleStopEntry.bind(this);
   }
   
   componentDidMount() {
@@ -56,9 +53,9 @@ class App extends React.Component {
   };
 
   async handleStopEntry() {
-    if(this.state.stopNumber){
+    if(this.state.stopNumber !== undefined){
       await this.props._getDepartureList('NEXTTRIP_BASEURL', this.state.stopNumber); 
-      this.props.history.push('/nextTrip');
+      this.props.history.push(`/nextTrip?stopId:${this.state.stopNumber}`);
     }
     else{
       alert('Please enter Stop number');
@@ -71,16 +68,16 @@ class App extends React.Component {
   return (
     <div >
       {routes.length > 0 ? (
-        <Form style={{margin: '10%', padding: '20px', backgroundColor: '#fff'}}>
+        <StyledForm>
           <FormGroup >
               <Dropdown 
+                id='routeDropDown'
                 list={routes} 
                 selectedItem={selectedRoute} 
                 handleChange={this.handleRouteChange} 
                 displayText='Description' 
                 keyValue='Route'
                 label='Select Route' />
-              {selectedRoute !== '' ? (
                 <>
                 <br />
                   <Dropdown 
@@ -89,10 +86,9 @@ class App extends React.Component {
                     handleChange={this.handleDirectionChange} 
                     displayText='Text' 
                     keyValue='Value'
-                    label='Select Direction' />
+                    label='Select Direction'
+                    disabled={!selectedRoute} />
                 </>
-              ) : null }
-              {selectedDirection !== '' ? (
                 <>
                 <br />
                   <Dropdown 
@@ -101,12 +97,12 @@ class App extends React.Component {
                     handleChange={this.handleStopChange} 
                     displayText='Text' 
                     keyValue='Value'
-                    label='Select Stops/Station'/>
+                    label='Select Stops/Station'
+                    disabled={!selectedDirection}/>
                 </>
-              ) : null }
           </FormGroup>
-          <Col sm={{offset:4,span:4}}>
-            <input type="number" style={{ border: '1px solid #424446'}}
+          <StyledLine/>
+            <StyledInput type="number"
               value={stopNumber} 
               onKeyPress={event => {
                 if (event.key === "Enter") {
@@ -115,14 +111,14 @@ class App extends React.Component {
               }}
               onChange={e => this.setState({stopNumber: e.target.value})}/>
             <StyledButton 
+              id='stopNumber'
               onClick={this.handleStopEntry} 
               size="sm" 
               disabled={!stopNumber} >
                 STOP NUMBER
             </StyledButton>
-          </Col>
-        </Form>
-      ) : <div> Loading Bus Routes .... </div>}
+        </StyledForm>
+      ) : <React.Fragment> Loading Bus Routes .... </React.Fragment>}
     </div>
   );
   }

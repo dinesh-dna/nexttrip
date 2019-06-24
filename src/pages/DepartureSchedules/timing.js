@@ -7,7 +7,9 @@ export default function timing(props) {
     return (
          <StyledRow >
             <NextTripDeparture sm={12}>
-                {departure ? `NexTrip departs in ${departure.DepartureText}` : 'No trips available'}
+                { departure && Object.keys(departure).length > 0 ?
+                     `NexTrip departs in ${departure.DepartureText}` : 
+                        'No trips available'}
             </NextTripDeparture>
             <CenterContentCol sm={12}  >
                      Current Time: {moment().format('h:mm a')}
