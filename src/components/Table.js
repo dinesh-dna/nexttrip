@@ -26,11 +26,18 @@ class DepartureTable extends React.Component {
                     <tbody style={{fontSize: '12px', fontWeight: 'bold'}}>
                         {timePointDeparture.map(eachItem => {
                             return (
-                                
                                     <tr key={eachItem.DepartureText}>
-                                        <td><a href={`https://www.metrotransit.org/route/${eachItem.Route}`}> {`${eachItem.Route}${eachItem.Terminal}`}</a></td>
-                                        <td><a href={`https://www.metrotransit.org/route/${eachItem.Route}`}>{eachItem.Description}</a></td>
-                                        <td style={eachItem.Actual ? {color: 'black'} :{color: '#ed1b2e'}}>{eachItem.DepartureText}</td>
+                                        <td>
+                                            <a href={`https://www.metrotransit.org/route/${eachItem.Route}`} rel="noopener noreferrer" target="_blank">
+                                                 {`${eachItem.Route}${eachItem.Terminal}`}
+                                            </a></td>
+                                        <td>
+                                            <a href={`https://www.metrotransit.org/route/${eachItem.Route}`}  rel="noopener noreferrer" target="_blank">
+                                                {eachItem.Description}
+                                            </a></td>
+                                        <td style={eachItem.Actual ? {color: 'black'} :{color: '#ed1b2e'}}>
+                                            {eachItem.DepartureText}
+                                        </td>
                                     </tr>)
                         })}      
                     </tbody>
