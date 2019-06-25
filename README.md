@@ -5,17 +5,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 src/ contains the app code.<br>
   
   For React UI Code: <br>
-      * Feature based architecture approach. <br>
-      * Every page is inside src/Pages, componets used inside the page is placed inside the page folder itself.<br>
-      * Reusable components in src/components<br>
-      * Each page has styles.js that uses styled-components<br>
-      * src/utils has all the utils functions.<br>
+      - Feature based architecture approach. <br>
+      - Every page is inside src/Pages, componets used inside the page is placed inside the page folder itself.<br>
+      - Reusable components in src/components<br>
+      - Each page has styles.js that uses styled-components<br>
+      - src/utils has all the utils functions.<br>
   <br>
   For Redux code:<br>
       <span>* src/Ducks -> used Ducks based architecute. All Redux code is in src/Ducks</span><br>
-      * Each API call has its own Actions and Reducers. <br>
-      * src/Ducks/index.js has api calls are integrated in. <br>
-      * src/Store has redux store. That servers as single source of truth for all API response.<br>
+      - Each API call has its own Actions and Reducers. <br>
+      - src/Ducks/index.js has api calls are integrated in. <br>
+      - src/Store has redux store. That servers as single source of truth for all API response.<br>
 
   Unit test for each component is placed next to the component with component.spec.js filename.<br>
   ### Packages
@@ -33,7 +33,7 @@ src/ contains the app code.<br>
 ### Commands
     yarn -> to Download all the necessary packages.
     yarn start -> to run in local , url : http://localhost:3000
-    yarn test -> to run all tests
+    yarn test a -> to run all tests
     yarn build -> Builds the app for production to the `build` folder.
 
     
