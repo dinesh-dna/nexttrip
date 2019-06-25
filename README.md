@@ -17,7 +17,11 @@ src/ contains the app code.<br>
       - src/Ducks/index.js has api calls are integrated in. <br>
       - src/Store has redux store. That servers as single source of truth for all API response.<br>
 
-  Unit test for each component is placed next to the component with component.spec.js filename.<br>
+  ### Tests: 
+      - Unit test for each component is placed next to the component with component.spec.js filename.<br>
+      - Jest and Enzyme for Unit test.<br>
+      - Automated Functional test using Cypress.io <br>
+
   ### Packages
       * Bootstrap 4 and React-Bootstrap is used for design and style the app.<br>
       * React-bootstrap/table is used for listing table information.<br>
