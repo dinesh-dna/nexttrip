@@ -11,8 +11,7 @@ describe('<Header />', () => {
         wrapper = shallow(<Header />);
     });
     it('should have component render', () => {
-        expect(wrapper).toBeTruthy();;
+        expect(wrapper).toBeTruthy();
         expect(wrapper.find('img')).toHaveLength(2);
-        expect(wrapper.find('Row')).toHaveLength(2);
     });
 })

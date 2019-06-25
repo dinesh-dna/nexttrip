@@ -14,7 +14,7 @@ describe('<App />', () => {
     const _getDirection= jest.fn();
     const _getTimePointDeparture= jest.fn();
     const _getRoutes= jest.fn();
-
+    const _getDepartureList = jest.fn();
     let props = {
         routes: [{
             Route: '1',
@@ -28,6 +28,9 @@ describe('<App />', () => {
             Text: 'Target',
             Value: '20'
         }],
+        history: {
+            push: jest.fn()
+        },
         displayText: "Description",
         id: "routeDropDown",
         keyValue: "Route",
@@ -39,8 +42,10 @@ describe('<App />', () => {
         _getStops,
         _getDirection,
         _getTimePointDeparture,
-        _getRoutes
+        _getRoutes,
+        _getDepartureList
     };
+
 
     beforeEach(() => {
         wrapper = shallow(<App {...props}/>);
@@ -52,20 +57,21 @@ describe('<App />', () => {
     });
 
     it('Test input Text box -> onChange method', () => {
-        wrapper.find('input').simulate('change',{target: {value: '1000'}});
+        wrapper.find('#txtstopNumber').simulate('change',{target: {value: '1000'}});
         expect(wrapper.state('stopNumber')).toBe('1000');
     });
 
     it('check for button, input, DropDowns components are present', () => {
         expect(wrapper.find('#stopNumber')).toHaveLength(1);
-        expect(wrapper.find('input')).toHaveLength(1);
+        expect(wrapper.find('#txtstopNumber')).toHaveLength(1);
         expect(wrapper.find('Dropdowns')).toHaveLength(3);
     });
 
-    it('Test the input box -> keyEntry method', () => {
-        console.log(wrapper.find('input').debug());
-        wrapper.find('input').simulate('keyPress',{key: 'Enter'});
-        expect(handleStopEntry).toHaveBeenCalledTimes(1);
+    it('Test the input box -> keyEntry method with data , check if button is enabled', () => {
+        wrapper.setState({stopNumber: 1});
+
+        wrapper.find('#txtstopNumber').simulate('keyPress',{key: 'Enter'});
+        expect(wrapper.find('#stopNumber').props().disabled).toBe(false);
     });
 
     it('check for button is disbled', () => {

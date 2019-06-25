@@ -102,7 +102,9 @@ export class App extends React.Component {
                 </>
           </FormGroup>
           <StyledLine/>
-            <StyledInput type="number"
+            <StyledInput 
+              id='txtstopNumber'
+              type="number"
               value={stopNumber} 
               onKeyPress={event => {
                 if (event.key === "Enter") {

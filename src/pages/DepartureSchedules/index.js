@@ -17,13 +17,15 @@ export class DepartureSchedules extends React.Component {
     };
 
     componentDidMount() {
-        let queryString = this.props.location.state;
-        if(queryString && queryString['stopID']){
-            this.setState({stopId: queryString['stopID']});
-        } else if (queryString && queryString['route']) {
-            this.setState({route: queryString['route']});
-            this.setState({direction: queryString['direction']});
-            this.setState({stops: queryString['stops']});
+        if(Object.keys(this.props.location.state).length > 0) {
+            let queryString = this.props.location.state;
+            if(queryString && queryString['stopID']){
+                this.setState({stopId: queryString['stopID']});
+            } else if (queryString && queryString['route']) {
+                this.setState({route: queryString['route']});
+                this.setState({direction: queryString['direction']});
+                this.setState({stops: queryString['stops']});
+            }
         }
     };
 

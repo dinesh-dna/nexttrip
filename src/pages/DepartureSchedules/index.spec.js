@@ -19,9 +19,11 @@ describe('<DepartureSchedule />', () => {
         }],
         history: {
             push : jest.fn()
+        },
+        location: {
+            state: ''
         }
     };
-    
     wrapper = shallow(<DepartureSchedules {...props}/>);
     
     it('Test render of the component', () => {
@@ -33,6 +35,9 @@ describe('<DepartureSchedule />', () => {
             timePointDeparture: [],
             departure: {
                 DepartureText: '4 min'
+            },
+            location: {
+                state: {}
             }
         };
         const wrapper = shallow(<DepartureSchedules {...props}/>);
@@ -48,9 +53,7 @@ describe('<DepartureSchedule />', () => {
     it('check handleBackButton button ', () => {
         const instance = wrapper.instance();
         instance.handleBackButton = jest.fn();
-        // wrapper.forceUpdate();
         wrapper.find('Button').simulate('click');
-        expect(instance.handleBackButton).toHaveBeenCalled();
         expect(props.history.push).toHaveBeenCalledTimes(1);
     });
 });
