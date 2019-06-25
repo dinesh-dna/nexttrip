@@ -1,17 +1,17 @@
 import { Reducer } from 'redux-testkit';
-import directionReducer, { initialState, getDirection, GET_DIRECTION } from './direction';
+import routeReducer, { initialState, getRoutes, GET_ROUTES } from './route';
 import {REQUEST_SUCCEEDED, requestSucceeded } from './requests';
 
 describe('Actions ', () => {
     it('should return the action object with resourceType', () => {
       const expected = {
-        type: GET_DIRECTION,
-        resourceType: 'DIRECTION',
-        id: 1,
-        query: undefined,
+        type: GET_ROUTES,
+        resourceType: 'ROUTE',
+        id: undefined,
+        query: 'format=json',
         details: undefined
       };
-      const actual = getDirection('DIRECTION', 1);
+      const actual = getRoutes('ROUTE');
       expect(actual).toEqual(expected);
     });
   });
@@ -20,9 +20,9 @@ describe('Actions ', () => {
       it('reducer test with initial state', () => {
           const expected = [];
 
-            Reducer(directionReducer)
+            Reducer(routeReducer)
                 .withState(initialState)
-                .expect(getDirection)
+                .expect(getRoutes)
                 .toReturnState(expected)
       });
 
@@ -32,14 +32,14 @@ describe('Actions ', () => {
             Value: 2
             }];
 
-        const action = {REQUEST_SUCCEEDED, GET_DIRECTION, response}
+        const action = {REQUEST_SUCCEEDED, GET_ROUTES, response}
 
         const expected = [{
             Text: 'Target',
             Value: 2
             }];
 
-        Reducer(directionReducer)
+        Reducer(routeReducer)
             .withState(response)
             .expect(action)
             .toReturnState(expected)

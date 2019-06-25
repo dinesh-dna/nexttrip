@@ -49,7 +49,7 @@ export class App extends React.Component {
      this.props.history.push('/nextTrip', 
       {route: this.state.selectedRoute.Description,
        direction: this.state.selectedDirection.Text,
-       stops: this.state.selectedStop.Text});
+       stops: selectedStop.Text});
   };
 
   handleStopEntry = () => {

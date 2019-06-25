@@ -15,6 +15,11 @@ export const StyledRow = styled(Row)`
     font-family: 'Lato', sans-serif !important;
 `;
 
+export const StopNamesRow = styled(Row)`
+    font-size: 12px;
+    margin: 15px;
+    font-weight: bold;
+`;
 export const NextTripDeparture = styled(Col)`
     display: flex;
     justify-content: center;

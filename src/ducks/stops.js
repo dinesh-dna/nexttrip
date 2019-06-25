@@ -12,7 +12,7 @@ export function getStops(resourceType, id, query, details) {
         type: GET_STOPS,
         resourceType: upperCase(resourceType),
         id,
-        query,
+        query: 'format=json',
         details
       };
 }

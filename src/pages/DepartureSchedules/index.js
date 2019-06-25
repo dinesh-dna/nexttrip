@@ -3,45 +3,21 @@ import {connect} from 'react-redux';
 import {Button, Col} from 'react-bootstrap';
 import Timing from './timing';
 import DepartureTable from './table';
-import {RowForBackButton} from './styles';
+import {RowForBackButton, StopNamesRow} from './styles';
 export class DepartureSchedules extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            direction: '',
-            route: '',
-            stopId: '',
-            stops: ''
-        }
-    };
-
-    componentDidMount() {
-        if(Object.keys(this.props.location.state).length > 0) {
-            let queryString = this.props.location.state;
-            if(queryString && queryString['stopID']){
-                this.setState({stopId: queryString['stopID']});
-            } else if (queryString && queryString['route']) {
-                this.setState({route: queryString['route']});
-                this.setState({direction: queryString['direction']});
-                this.setState({stops: queryString['stops']});
-            }
-        }
-    };
 
     handleBackButton = () => {
         this.props.history.push('/');
     };
 
     render() {
-    const {timePointDeparture, departure} = this.props;
-    const {stopId, route, direction, stops} = this.state;
+    const {timePointDeparture, departure, location} = this.props;
     return (
         <div>
-            <div style={{fontSize: '12px', margin: '10px'}}>
-                <span>{route} {direction} {stops} </span><br/>
-                <span > Stop Number : {stopId} </span>
-            </div>
+            <StopNamesRow>
+                <span>{location.state.route} {location.state.direction} {location.state.stops} </span><br/>
+                <span > {location.state.stopID ? `Stop Number : ${location.state.stopID}`: null} </span>
+            </StopNamesRow>
             <Timing departure={departure}/>
             { timePointDeparture.length > 0 ? 
                 <DepartureTable timePointDeparture={timePointDeparture} headers={['Route', 'Description', 'Departs']}/> : (
