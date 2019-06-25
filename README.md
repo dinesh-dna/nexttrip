@@ -1,5 +1,7 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# nexttrip
+NextTrip Metrotransit case study
 
+Model URl : 
 
 ### Structure
 src/ contains the app code.<br>
