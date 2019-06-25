@@ -1,4 +1,4 @@
-# nexttrip
+# Nexttrip MetroTransit 
 NextTrip Metrotransit case study
 
 Model URL :  https://www.metrotransit.org/nextripbadge.aspx
