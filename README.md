@@ -1,7 +1,8 @@
 # nexttrip
 NextTrip Metrotransit case study
 
-Model URl : 
+Model URL :  https://www.metrotransit.org/nextripbadge.aspx
+NextTrip API documentation: http://svc.metrotransit.org/
 
 ### Structure
 src/ contains the app code.<br>
@@ -41,6 +42,7 @@ src/ contains the app code.<br>
     yarn start -> to run in local , url : http://localhost:3000
     yarn test a -> to run all tests
     yarn build -> Builds the app for production to the `build` folder.
+    yarn cypress -> to run cypress test.
 
     
   
