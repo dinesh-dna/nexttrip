@@ -1,5 +1,4 @@
 import React from 'react';
-import './index.css';
 import { FormGroup } from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {getDirection} from '../../ducks/direction';
@@ -19,8 +18,6 @@ export class App extends React.Component {
       selectedStop: '',
       stopNumber: ''
     }
-     this.handleStopChange = this.handleStopChange.bind(this);
-     this.handleStopEntry = this.handleStopEntry.bind(this);
   }
   
   componentDidMount() {
@@ -43,19 +40,22 @@ export class App extends React.Component {
     this.props._getStops('STOPS',`${this.state.selectedRoute['Route']}/${selectedDirection['Value']}`);
   };
 
-  async handleStopChange(e) {
+  handleStopChange = e => {
     const selectedStop = this.props.stopsStationList.find(eachStop => eachStop.Text === e.target.value);
     this.setState(function(){
       return {selectedStop: selectedStop}
     });
-     await this.props._getTimePointDeparture('NEXTTRIP_BASEURL',`${this.state.selectedRoute['Route']}/${this.state.selectedDirection['Value']}/${selectedStop['Value']}`);
-     this.props.history.push('/nextTrip');
+     this.props._getTimePointDeparture('NEXTTRIP_BASEURL',`${this.state.selectedRoute['Route']}/${this.state.selectedDirection['Value']}/${selectedStop['Value']}`);
+     this.props.history.push('/nextTrip', 
+      {route: this.state.selectedRoute.Description,
+       direction: this.state.selectedDirection.Text,
+       stops: this.state.selectedStop.Text});
   };
 
-  async handleStopEntry() {
+  handleStopEntry = () => {
     if(this.state.stopNumber !== undefined){
-      await this.props._getDepartureList('NEXTTRIP_BASEURL', this.state.stopNumber); 
-      this.props.history.push(`/nextTrip?stopId:${this.state.stopNumber}`);
+      this.props._getDepartureList('NEXTTRIP_BASEURL', this.state.stopNumber); 
+      this.props.history.push('/nextTrip', {stopID: this.state.stopNumber});
     }
     else{
       alert('Please enter Stop number');

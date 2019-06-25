@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Table } from 'react-bootstrap';
 
 export const CenterContentCol = styled(Col)`
     display: flex;
@@ -9,7 +9,7 @@ export const CenterContentCol = styled(Col)`
 `;
 
 export const StyledRow = styled(Row)`
-    margin: 20px 0 20px 0;
+    margin: 10px 0 20px 0;
     background-image: linear-gradient(#FFDB3A, #ffeeb2);
     height: 60px;
     font-family: 'Lato', sans-serif !important;
@@ -27,4 +27,18 @@ export const RowForBackButton = styled(Row)`
     display: flex;
     justify-content: center;
     margin-top: 30px;
+`;
+
+export const StyledTable = styled(Table)`
+    font-family: 'Lato', sans-serif !important;
+    font-weight: bold;
+    font-size: 12px;
+`;
+
+export const ColForTable = styled(Col)`
+    margin-top: '40px',
+`;
+
+export const ColForUnderlineText = styled(Col)`
+    font-size: 11px;
 `;

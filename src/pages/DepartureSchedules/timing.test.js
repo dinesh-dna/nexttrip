@@ -31,6 +31,6 @@ describe('<Timing />', () => {
     });
 
     it('Test the current time text', () => {
-        expect(wrapper.find('Current Time:')).toBe(true);
+        expect(wrapper.text()).toContain('Current Time:');
     });
 });

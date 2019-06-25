@@ -18,5 +18,4 @@ export const Content = styled.div`
   overflow: hidden;
   background-color: 'rgba(227, 227, 227, 0.5)';
 `;
-// Content.displayName = 'Content';
-// App.displayName = 'App';
+

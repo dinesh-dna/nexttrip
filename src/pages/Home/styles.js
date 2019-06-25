@@ -12,7 +12,7 @@ export const StyledLine = styled.hr`
 `;
 
 export const StyledButton = styled(Button)`
-margin-left: 20px;
+    margin-left: 20px;
 `;
 
 export const StyledInput = styled.input`

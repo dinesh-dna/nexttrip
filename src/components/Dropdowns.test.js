@@ -32,4 +32,18 @@ describe('<DropDowns />', () => {
         wrapper.find('FormControl').simulate('change');
         expect(handleChange).toHaveBeenCalledTimes(1);
     });
+
+    it('Disabled Dropdown check ', () => {
+        const props = {
+            list: [{'Route': 1},{'Route': 2}], 
+            selectedItem : '', 
+            displayText : 'Route', 
+            keyValue : 'Route', 
+            label : 'Route',
+            handleChange,
+            disabled :true
+        }
+        wrapper = shallow(<DropDowns {...props}/>);
+        expect(wrapper.find('FormControl').props().disabled).toBe(true);
+    });
 })

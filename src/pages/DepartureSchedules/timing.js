@@ -11,7 +11,7 @@ export default function timing(props) {
                      `NexTrip departs in ${departure.DepartureText}` : 
                         'No trips available'}
             </NextTripDeparture>
-            <CenterContentCol sm={12}  >
+            <CenterContentCol sm={12}>
                      Current Time: {moment().format('h:mm a')}
             </CenterContentCol>
         </StyledRow>
