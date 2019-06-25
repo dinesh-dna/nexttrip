@@ -81,6 +81,7 @@ export class App extends React.Component {
                 <>
                 <br />
                   <Dropdown 
+                    id='directionDropDown'
                     list={direction} 
                     selectedItem={selectedDirection} 
                     handleChange={this.handleDirectionChange} 
@@ -92,6 +93,7 @@ export class App extends React.Component {
                 <>
                 <br />
                   <Dropdown 
+                    id='stopsDropDown'
                     list={stopsStationList} 
                     selectedItem={selectedStop} 
                     handleChange={this.handleStopChange} 

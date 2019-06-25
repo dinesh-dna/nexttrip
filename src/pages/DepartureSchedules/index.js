@@ -16,7 +16,7 @@ export class DepartureSchedules extends React.Component {
         <div>
             <StopNamesRow>
                 <span>{location.state.route} {location.state.direction} {location.state.stops} </span><br/>
-                <span > {location.state.stopID ? `Stop Number : ${location.state.stopID}`: null} </span>
+                <span id='enteredStopNumber'> {location.state.stopID ? `Stop Number : ${location.state.stopID}`: null} </span>
             </StopNamesRow>
             <Timing departure={departure}/>
             { timePointDeparture.length > 0 ? 
