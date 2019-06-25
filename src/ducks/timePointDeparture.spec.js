@@ -44,7 +44,7 @@ describe('Actions ', () => {
             Value: 2
             }];
         
-        const action = {REQUEST_SUCCEEDED, GET_TIMEPOINTDEPARTURE, response}
+        const action = requestSucceeded(REQUEST_SUCCEEDED, GET_TIMEPOINTDEPARTURE, response);
 
         const expected = [{
             Text: 'Target',

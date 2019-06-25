@@ -1,7 +1,8 @@
 import React from 'react';
 import {Row, Col } from 'react-bootstrap';
-import tagLineImage from '../blue.png';
-import icon from '../mob_logo.png';
+import tagLineImage from '../utils/blue.png';
+import icon from '../utils/mob_logo.png';
+import {HeaderCol} from '../utils/styles';
 
 export function Header() {
     return (
@@ -13,7 +14,7 @@ export function Header() {
                 <Col sm={2}  style={{backgroundColor: '#ffffff'}}> 
                 <img src={tagLineImage} alt=' Serving Minneapolis St Paul Area' />
                 </Col> 
-                <Col sm={10} style={{height: '22px', borderRadius: '9px', marginTop: '3px',  backgroundColor: '#EBCA23'}} />
+                <HeaderCol sm={10} />
             </Row>
         </React.Fragment>
     )

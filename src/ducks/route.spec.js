@@ -1,7 +1,7 @@
 import { Reducer } from 'redux-testkit';
+import SagaTester from 'redux-saga-tester';
 import routeReducer, { initialState, getRoutes, GET_ROUTES } from './route';
-import {REQUEST_SUCCEEDED, requestSucceeded } from './requests';
-
+import {REQUEST_SUCCEEDED, requestSucceeded, REQUEST_FAILED, requestFailed } from './requests';
 describe('Actions ', () => {
     it('should return the action object with resourceType', () => {
       const expected = {
@@ -32,7 +32,7 @@ describe('Actions ', () => {
             Value: 2
             }];
 
-        const action = {REQUEST_SUCCEEDED, GET_ROUTES, response}
+        const action = requestSucceeded(REQUEST_SUCCEEDED, GET_ROUTES, response)
 
         const expected = [{
             Text: 'Target',
@@ -43,5 +43,54 @@ describe('Actions ', () => {
             .withState(response)
             .expect(action)
             .toReturnState(expected)
+    });
+  });
+
+  describe('Saga test', () => {
+    const testState = {
+      routes: []
+    };
+    let sagaTester;
+  
+    beforeEach(() => {
+      sagaTester = new SagaTester({
+        initialState: testState,
+        reducers: {
+          routes: routeReducer
+        }
+      });
+    });
+
+    xit('Successfully performs routes', async () => {
+      const routes = [{
+        'Route': '1',
+        'Description' : 'Target'
+      }];
+      const mockExpected = [{
+        'Route': '1',
+        'Description' : 'Target'
+      }];
+
+      jest.resetModules();
+      jest.mock('./requests', () => () => 
+        Promise.resolve({
+          mockExpected
+        })
+      );
+      require('../utils/axiosRequest');
+      const routeWatcher = require('./route')
+      .routeWatcherSaga;
+      sagaTester.start(routeWatcher);
+
+      const action = getRoutes(routes);
+      sagaTester.dispatch(action);
+
+     await sagaTester.waitFor(REQUEST_SUCCEEDED);
+      expect(sagaTester.getState()).toEqual({
+      routes: {
+        mockExpected
+      }
+    });
+
     });
   });

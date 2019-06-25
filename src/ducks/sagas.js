@@ -19,3 +19,4 @@ export function* getWorkerSaga(action) {
       yield put(requestFailed(type, resourceType, e, { id, query }));
     }
   }
+

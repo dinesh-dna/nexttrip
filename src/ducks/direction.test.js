@@ -32,7 +32,7 @@ describe('Actions ', () => {
             Value: 2
             }];
 
-        const action = {REQUEST_SUCCEEDED, GET_DIRECTION, response}
+        const action = requestSucceeded(REQUEST_SUCCEEDED, GET_DIRECTION, response)
 
         const expected = [{
             Text: 'Target',

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {Col } from 'react-bootstrap';
 
 export const App = styled.div`
   margin: 0;
@@ -19,3 +20,9 @@ export const Content = styled.div`
   background-color: 'rgba(227, 227, 227, 0.5)';
 `;
 
+export const HeaderCol = styled(Col)`
+  height: 22px;
+  border-radius: 9px;
+  margin-top: 3px;
+  background-color: #EBCA23;
+`;
